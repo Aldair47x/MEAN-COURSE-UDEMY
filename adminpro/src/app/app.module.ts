@@ -10,6 +10,7 @@ import { Graficas1Component } from './pages/graficas1/graficas1.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component';
 import { ProgressComponent } from './pages/progress/progress.component';
+import { PagesComponent } from './pages/pages.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ProgressComponent } from './pages/progress/progress.component';
     Graficas1Component,
     SidebarComponent,
     BreadcrumbsComponent,
-    ProgressComponent
+    ProgressComponent,
+    PagesComponent
   ],
   imports: [
     BrowserModule,
