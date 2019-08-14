@@ -12,4 +12,4 @@ var usuarioSchema = new Schema({
     role: { type: String, required: true, default: 'USER_ROLE' }
 });
 
-module.exports = mongoose.model('User', usuarioSchema);
+module.exports = mongoose.model('Usuario', usuarioSchema);
