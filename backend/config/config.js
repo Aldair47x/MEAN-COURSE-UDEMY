@@ -1,1 +1,1 @@
-module.exports.SEED = 'este-es';
+module.exports.SEED = 'aldair47x';

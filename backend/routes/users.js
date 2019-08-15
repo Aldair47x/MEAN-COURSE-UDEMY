@@ -27,8 +27,10 @@ router.get('/', function (req, res, next) {
 });
 
 /* POST new user. */
+//verificaToken.verificaToken,
 
-router.post('/', verificaToken.verificaToken, function ( req, res, next) {
+
+router.post('/', function ( req, res, next) {
   var body = req.body;
   
   var usuario = new Usuario({
