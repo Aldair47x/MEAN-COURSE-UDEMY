@@ -37,7 +37,7 @@ router.post('/', function(req, res, next){
         }
 
         user.password = ':)';
-        var token = jwt.sign({user: user}, seed, { expiresIn: 14400 });
+        var token = jwt.sign({user: user}, seed, { expiresIn: 144000000009 });
 
 
       

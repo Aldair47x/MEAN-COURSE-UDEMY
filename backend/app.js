@@ -11,6 +11,9 @@ var loginRouter = require('./routes/login');
 var hospitalRouter = require('./routes/hospital');
 var medicosRouter = require('./routes/medico');
 var busquedaRouter = require('./routes/busqueda');
+var uploadRouter = require('./routes/upload');
+var imagenesRouter = require('./routes/imagenes');
+
 
 var app = express();
 
@@ -34,7 +37,8 @@ app.use('/login', loginRouter);
 app.use('/hospital', hospitalRouter);
 app.use('/medico', medicosRouter);
 app.use('/busqueda', busquedaRouter);
-
+app.use('/upload', uploadRouter);
+app.use('/imagenes', imagenesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
