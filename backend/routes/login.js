@@ -25,7 +25,7 @@ router.post('/', function(req, res, next){
               mensaje: 'Credenciales incorrectas - email',
               errors: err
             });
-        }
+        } 
 
         //Error de contraseña
         if( !bcrypt.compareSync( body.password, user.password)){
