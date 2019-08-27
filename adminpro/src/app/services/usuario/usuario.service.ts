@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { URL_SERVICES } from 'src/app/config/config';
 import swal from 'sweetalert';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -14,14 +15,42 @@ export class UsuarioService {
   usuario: Usuario;
   token: string;
 
-  constructor(public _http: HttpClient) { 
+  constructor(
+    public _http: HttpClient,
+    public _router: Router) { 
 
     console.log("Servicio de usuario listo");
+    this.loadFromStorage();
 
   }
 
+  loadFromStorage() {
+    if( localStorage.getItem('token')) {
+      this.token = localStorage.getItem('token');
+      this.usuario = JSON.parse(localStorage.getItem('usuario'));
+    } else {
+      this.token = '';
+      this.usuario = null;
+    }
+  }
+
+  logOut() {
+    this.usuario = null;
+    this.token = '';
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
+
+    this._router.navigate(['/login']);
+  }
+
   isLogin(){
-    return ( this.token.length > 5) ? true : false  
+    console.log(this.token);
+    if( this.token === undefined ){
+      return;
+    } else {
+      return ( this.token.length > 5) ? true : false; 
+    }
   }
 
   login( usuario: Usuario, recordar: boolean = false ){

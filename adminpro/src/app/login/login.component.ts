@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  ingresar(forma: NgForm) {
+  async ingresar(forma: NgForm) {
     if( forma.invalid ){
       return;
     }
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       forma.value.password
     );
 
-    this._usuarioService.login( usuario, this.recuerdame )
+    await this._usuarioService.login( usuario, this.recuerdame )
       .subscribe(resp => {
         this._router.navigate([ '/dashboard' ]);
       })
