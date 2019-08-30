@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PagesRoutes } from './pagesRouting.module';
 import { SharedModule } from '../shared/shared.module';
@@ -13,6 +14,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 
@@ -28,7 +31,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         GraficoDonaComponent,
         AccountSettingsComponent,
         PromesasComponent,
-        RxjsComponent
+        RxjsComponent,
+        PerfilComponent
     ],
 
     exports: [
@@ -45,7 +49,9 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         PagesRoutes,
         FormsModule,
         ChartsModule,
-        BrowserModule
+        BrowserModule,
+        PipesModule,
+        CommonModule
     ]
 })
 

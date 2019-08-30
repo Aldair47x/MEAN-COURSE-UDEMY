@@ -3,8 +3,10 @@ import { Usuario } from 'src/app/models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICES } from 'src/app/config/config';
 import swal from 'sweetalert';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { SubirArchivoService } from '../subirArchivo/subir-archivo.service';
+import { throwError } from 'rxjs';
 
 
 @Injectable({
@@ -17,7 +19,9 @@ export class UsuarioService {
 
   constructor(
     public _http: HttpClient,
-    public _router: Router) { 
+    public _router: Router,
+    public _subirArchivo: SubirArchivoService
+    ) { 
 
     console.log("Servicio de usuario listo");
     this.loadFromStorage();
@@ -34,6 +38,17 @@ export class UsuarioService {
     }
   }
 
+  guardarStorage( id: string, token: string, usuario: Usuario) {
+
+    localStorage.setItem('id', id);
+    localStorage.setItem('token', token);
+    localStorage.setItem('usuario', JSON.stringify(usuario));
+
+    this.usuario = usuario;
+    this.token = token;
+
+}
+
   logOut() {
     this.usuario = null;
     this.token = '';
@@ -45,12 +60,8 @@ export class UsuarioService {
   }
 
   isLogin(){
-    console.log(this.token);
-    if( this.token === undefined ){
-      return;
-    } else {
-      return ( this.token.length > 5) ? true : false; 
-    }
+
+    return ( this.token.length > 5) ? true : false; 
   }
 
   login( usuario: Usuario, recordar: boolean = false ){
@@ -67,12 +78,14 @@ export class UsuarioService {
     return this._http.post(url, usuario)
     .pipe(
       map( (resp: any) => {
-        localStorage.setItem('id', resp.id );
-        localStorage.setItem('token', resp.token );
-        localStorage.setItem('usuario', JSON.stringify(resp.usuario) );
-
+        this.guardarStorage(resp.id,resp.token,resp.usuario);
         return true;
-      })
+      }),
+      catchError(err => {
+        console.log(err.error.mensaje);
+        swal('Error en el login', err.error.mensaje, 'error');
+        return throwError(err);
+    })
     )
   }
 
@@ -84,6 +97,41 @@ export class UsuarioService {
         return resp.user;
       })
     )
+  }
+
+  actualizarUsuario( usuario: Usuario) {
+
+    let url = URL_SERVICES + '/user/' + usuario._id;
+    console.log(url);
+
+    return this._http.put(url, usuario)
+    .pipe(
+      map( (resp: any) => {
+
+        this.guardarStorage(resp.usuario._id, this.token, resp.usuario);
+        swal('Usuario actualizado', usuario.name, 'success')
+
+
+        return true;  
+      })
+    );
+
+  }
+
+  cambiarImagen(file: File, id: string){
+    this._subirArchivo.subirArchivo( file, 'usuarios', id)
+    .then( (resp: any) => {
+      console.log(resp);
+      this.usuario.img = resp.usuario.img;
+      swal( 'Iamgen actualizada', this.usuario.name, 'success');
+
+      this.guardarStorage( id, this.token, this.usuario );
+
+    })
+
+    .catch( resp => {
+      console.log(resp);
+    });
   }
 
 }

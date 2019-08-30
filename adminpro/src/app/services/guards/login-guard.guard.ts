@@ -15,7 +15,7 @@ export class LoginGuardGuard implements CanActivate {
     public _router: Router
     ){}
 
-  canActivate() {
+  canActivate(): boolean {
     
     if( this._usuarioService.isLogin() ){
       console.log('Is login');

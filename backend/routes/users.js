@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var bcrypt = require('bcryptjs');
-var verificaToken = require('../middleware/auth');
+var bcrypt = require('bcryptjs'); 
 
 var Usuario = require('../models/user');
 
@@ -87,7 +86,6 @@ router.put('/:id', function(req, res, next) {
 
     user.name = body.name;
     user.email = body.email;
-    user.role = body.role;
 
     user.save( (err, usuarioGuardado) => {
       if (err) {
