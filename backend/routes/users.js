@@ -7,7 +7,7 @@ var Usuario = require('../models/user');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  Usuario.find({}, 'nombre email img role')
+  Usuario.find({}, 'name email img role google')
     .exec(
       (err, usuarios) => {
         if (err) {
@@ -86,6 +86,8 @@ router.put('/:id', function(req, res, next) {
 
     user.name = body.name;
     user.email = body.email;
+    user.role = body.role;
+
 
     user.save( (err, usuarioGuardado) => {
       if (err) {
