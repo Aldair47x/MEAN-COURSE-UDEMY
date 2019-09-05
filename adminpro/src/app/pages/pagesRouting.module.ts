@@ -10,6 +10,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { LoginGuardGuard } from '../services/guards/login-guard.guard';
 import { PerfilComponent } from './perfil/perfil.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { HospitalesComponent } from './hospitales/hospitales.component';
+import { MedicosComponent } from './medicos/medicos.component';
 
 
 const pagesRoutes: Routes = [
@@ -24,6 +26,8 @@ const pagesRoutes: Routes = [
         {path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas'}},
         {path: 'rxjs', component: RxjsComponent, data: { titulo: 'RxJs'}},
         {path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Usuarios'}},
+        {path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Hospitales'}},
+        {path: 'medicos', component: MedicosComponent, data: { titulo: 'Medicos'}},
         {path: 'perfil', component: PerfilComponent , data: { titulo: 'Perfil de usuario'} },
         
         {path: '**', component: NopagefoundComponent, data: { titulo: 'Dashboard'} },

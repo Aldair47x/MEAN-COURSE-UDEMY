@@ -125,7 +125,7 @@ export class UsuarioService {
     .then( (resp: any) => {
       console.log(resp);
       this.usuario.img = resp.usuario.img;
-      swal( 'Iamgen actualizada', this.usuario.name, 'success');
+      swal( 'Imagen actualizada', this.usuario.name, 'success');
 
       this.guardarStorage( id, this.token, this.usuario );
 

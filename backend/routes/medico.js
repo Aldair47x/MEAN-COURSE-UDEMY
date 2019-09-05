@@ -140,4 +140,10 @@ router.delete('/:id', verificaToken.verificaToken, function (req, res, next) {
 });
 
 
+// ==========================================
+// Get by ID
+// ==========================================
+
+
+
 module.exports = router;

@@ -13,11 +13,20 @@ export class SidebarService {
         { titulo: 'ProgressBar', url: '/progress'},
         { titulo: 'Graficas', url: '/graficas1'},
         { titulo: 'Promesas', url: '/promesas'},
-        { titulo: 'Usuarios', url: '/usuarios'},
         { titulo: 'Rxjs', url: '/rxjs'},
 
       ]
+    },
+    {
+      titulo: 'Mantenimiento',
+      icono: 'mdi mdi-minecraft',
+      submenu: [
+        { titulo: 'Usuarios', url: '/usuarios'},
+        { titulo: 'Hospitales', url: '/hospitales'},
+        { titulo: 'Medicos', url: '/medicos'},
+      ]
     }
+    
   ];
   
   constructor() { }
